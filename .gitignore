@@ -1,7 +1,13 @@
 __pycache__
 .vscode/
+.ruff_cache
+
+venv
 
 *.log
+
+# MATLAB mat files.
+*.mat
 
 # Prerequisites
 *.d

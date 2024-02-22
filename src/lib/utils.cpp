@@ -131,40 +131,29 @@ void cleanMatrix(double** matrix, int rows) {
 
 string getMatrixString(double** matrix, int rows, int cols, int cellSize = 8) {
     stringstream ss;
-    
-    if (rows < 16) {
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < cols; ++j) {
-                ss << setw(cellSize) << matrix[i][j] << "\t";
-            }
-            ss << endl;
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            ss << setw(cellSize) << matrix[i][j] << "\t";
         }
+        ss << endl;
     }
-    else {
-        ss << "Matrix written in .out file ..." << endl;
-    }
-    
     return ss.str();
 };
 
 string getVectorString(double* vector, int n) {
     stringstream ss;
 
-    if (n < 16) {
-        ss << "[";
-        for (int i = 0; i < n; ++i) {
-            if (i < n - 1) {
-                ss << vector[i] << ", ";
-            }
-            else {
-                ss << vector[i];
-            }
+    ss << "[";
+    for (int i = 0; i < n; ++i) {
+        if (i < n - 1) {
+            ss << vector[i] << ", ";
         }
-        ss << "]";
+        else {
+            ss << vector[i];
+        }
     }
-    else {
-        ss << "Vector written in .out file ..." << endl;
-    }
-    
+    ss << "]";
+
     return ss.str();
 };
