@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vonMises"
-version = "0.0.1"
+version = "1.0.0"
 authors = [
     {name = "Saud Zahir", email = "m.saud.zahir@gmail.com"},
 ]
@@ -16,11 +16,14 @@ dependencies = [
     "requests",
     'importlib-metadata; python_version<"3.10"',
 ]
-dynamic = ["version"]
 
 [project.optional-dependencies]
 pdf = ["ReportLab>=1.2", "RXP"]
 rest = ["docutils>=0.3", "pack ==1.1, ==1.3"]
 
 [project.scripts]
-vonMises = "src.__main__:main()"
+vonMises = "src.__main__:main"
+
+
+[tool.distutils.bdist_wheel]
+universal = true
