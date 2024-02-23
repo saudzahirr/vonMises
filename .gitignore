@@ -8,8 +8,6 @@ build/
 
 *.log
 
-# MATLAB mat files.
-*.mat
 
 # Prerequisites
 *.d
