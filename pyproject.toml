@@ -1,26 +1,2 @@
 [build-system]
-requires = ["setuptools", "setuptools-scm"]
-build-backend = "setuptools.build_meta"
-
-[project]
-name = "vonMises"
-version = "1.0.0"
-authors = [
-    {name = "Saud Zahir", email = "m.saud.zahir@gmail.com"},
-]
-description = "Numerical Algorithm for Eigen Value Problems"
-readme = "README.md"
-requires-python = ">=3.8"
-
-dependencies = [
-    "numpy",
-    "scipy",
-    'importlib-metadata; python_version<"3.10"',
-]
-
-[project.scripts]
-vonMises = "src.__main__:main"
-
-
-[tool.distutils.bdist_wheel]
-universal = true
+requires = ["setuptools", "wheel"]

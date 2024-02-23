@@ -1,0 +1,13 @@
+importlib-metadata; python_version < "3.10"
+wheel
+setuptools
+requests
+numpy
+scipy
+pandas
+matplotlib
+plotly
+psutil
+ruff
+pytest
+tqdm

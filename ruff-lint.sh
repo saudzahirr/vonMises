@@ -1,4 +1,4 @@
-@echo off
+#!/bin/bash
 ruff --version
 ruff --fix .
 ruff format .
