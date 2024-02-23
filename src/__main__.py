@@ -1,6 +1,5 @@
 import argparse
-import eigen
-import utils
+from src import eigen, utils
 import sys
 
 
