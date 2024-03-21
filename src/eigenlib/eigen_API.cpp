@@ -1,4 +1,4 @@
-#include "eigen.h"
+#include "eigen_API.h"
 
 
 void solveEigenValueProblem(double** A, int size) {
