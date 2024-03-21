@@ -1,2 +1,30 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+requires = [
+  "setuptools>=64",
+  "setuptools_scm>=8",
+  "scikit-build>=0.16",
+  "cmake>=3.22",
+  "ninja",
+]
+
+[project]
+authors = [{name = "Saud Zahir", email = "m.saud.zahir@gmail.com"}]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: C++ :: 11",
+  "License :: proprietary",
+  "Operating System :: Linux",
+]
+description = "Numerical Algorithm for Eigen Value Problems."
+keywords = ["numerical"]
+license = {file = "LICENSE"}
+name = "vonMises"
+requires-python = ">=3.11"
+dynamic = ["version"]
+
+[project.urls]
+"Homepage" = "https://github.com/saudzahirr/vonMises"
+
+[project.scripts]
+"vonMises" = "src.__main__:main"
