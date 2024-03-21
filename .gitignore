@@ -3,8 +3,10 @@ __pycache__
 .ruff_cache
 
 *.egg-info
+_skbuild/
 dist/
 build/
+lib/
 
 *.log
 

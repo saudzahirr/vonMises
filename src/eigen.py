@@ -1,12 +1,12 @@
 import ctypes
-import platform
+import sys
 import time
 from pathlib import Path
 
-if platform.system() == "Windows":
+if sys.platform == "win32":
     shared_file_path = Path.cwd() / "src/lib/eigen.dll"
     eigen_lib = ctypes.CDLL(str(shared_file_path), winmode=0)
-elif platform.system() == "Linux":
+elif sys.platform == "linux":
     shared_file_path = Path.cwd() / "src/lib/libeigen.so"
     eigen_lib = ctypes.CDLL(str(shared_file_path))
 
