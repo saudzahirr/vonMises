@@ -9,6 +9,7 @@ _skbuild/
 lib/
 _cmake_test_compile/
 
+_version.py
 *.log
 
 

@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 3.22...3.28)
+set(CMAKE_CXX_COMPILER "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++")
+set(CMAKE_CXX_COMPILER "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\gcc")
+
 project(vonMises)
 
 
