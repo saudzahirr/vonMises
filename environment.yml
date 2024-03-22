@@ -4,5 +4,18 @@ channels:
 dependencies:
   - python=3.11
   - pip
+  - wheel
+  - setuptools
+  - scikit-build
+  - requests
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - plotly
+  - psutil
+  - ruff
+  - pytest
+  - tqdm
   - pip:
-    - -r requirements.txt
+  - - -r requirements.txt

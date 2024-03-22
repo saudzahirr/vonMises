@@ -104,14 +104,6 @@ string getCMakeVersion() {
     return executeCommand("cmake --version");
 }
 
-int get_num_of_threads() {
-#ifdef _WIN32
-    return thread::hardware_concurrency();
-#else
-    return omp_get_thread_num();
-#endif
-}
-
 void logSystemInfoOnce() {
     static bool systemInfoLogged = false;
     if (!systemInfoLogged) {
@@ -127,7 +119,7 @@ void logSystemInfoOnce() {
 
         string systemInfo = "CMake Version: " + getCMakeVersion() + "\n" +
                             + "G++ Version: " + getGPPVersion() + "\n" +
-                            + "OMP max threads: " + to_string(get_num_of_threads());
+                            + "OMP max threads: " + to_string(omp_get_max_threads());
 
         ofstream logFile("vonMises.log", ios::out);
         if (logFile.is_open()) {

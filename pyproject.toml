@@ -1,2 +1,5 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools", "setuptools_scm", "wheel"]
+
+[tool.setuptools_scm]
+version_file = "src/_version.py"
