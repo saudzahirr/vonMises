@@ -1,6 +1,7 @@
 importlib-metadata; python_version < "3.10"
 wheel
 setuptools
+scikit-build
 requests
 numpy
 scipy
