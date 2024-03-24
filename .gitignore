@@ -2,6 +2,7 @@ __pycache__
 .vscode/
 .ruff_cache
 
+# Build files
 *.egg-info
 _skbuild/
 dist/
