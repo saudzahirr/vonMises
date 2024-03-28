@@ -32,7 +32,7 @@ jobs:
 
     - name: Code Lint
       run: |
-        source activate vonMises
+        conda activate vonMises
         ruff version
         ruff format --check .
         ruff check --output-format=github .
