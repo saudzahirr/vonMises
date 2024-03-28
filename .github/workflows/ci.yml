@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Build and Test
 
 on:
   push:
@@ -13,10 +13,36 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build and test
+
+    - name: Setup Conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment: vonMises
+        environment-file: environment.yml
+
+    - name: Initialize Conda
+      run: |
+        conda init bash
+        source ~/.bashrc
+
+    - name: Activate Conda environment
+      run: |
+        source /usr/share/miniconda/etc/profile.d/conda.sh
+        conda activate vonMises
+
+    - name: Build
       run: |
         mkdir build
         cd build
         cmake ..
         cmake --build .
         cd ..
+        python install.py
+
+    - name: Code Lint
+      run: |
+        source /usr/share/miniconda/etc/profile.d/conda.sh
+        conda activate vonMises
+        ruff version
+        ruff format --check .
+        ruff check --output-format=github .
