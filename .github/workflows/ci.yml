@@ -22,11 +22,13 @@ jobs:
 
     - name: Initialize Conda
       run: |
-        /usr/share/miniconda/bin/conda init bash
-        eval "$(/usr/share/miniconda/bin/conda shell.bash hook)"
+        conda init bash
+        source ~/.bashrc
 
     - name: Activate Conda environment
-      run: conda activate vonMises
+      run: |
+        conda activate vonMises
+        echo "Conda environment activated"
 
     - name: Build
       run: |
@@ -39,6 +41,7 @@ jobs:
 
     - name: Code Lint
       run: |
+        conda activate vonMises
         ruff version
         ruff format --check .
         ruff check --output-format=github .
