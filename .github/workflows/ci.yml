@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Build and Test
 
 on:
   push:
@@ -13,10 +13,27 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build and test
+    
+    - name: Set up Conda Environment
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment: vonMises
+        environment-file: environment.yml
+        auto-update-conda: true
+
+    - name: Build
       run: |
         mkdir build
         cd build
         cmake ..
         cmake --build .
         cd ..
+        python install.py
+        ./build/vonMises -m test-data/MATRIX.mat -k A
+
+    - name: Code Lint
+      run: |
+        source activate vonMises
+        ruff version
+        ruff format --check .
+        ruff check --output-format=github .
