@@ -15,11 +15,9 @@ jobs:
     - uses: actions/checkout@v3
     
     - name: Set up Conda Environment
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        activate-environment: vonMises
-        environment-file: environment.yml
-        auto-update-conda: true
+      run: |
+        conda env create -f environment.yml
+        conda activate vonMises
 
     - name: Build
       run: |
