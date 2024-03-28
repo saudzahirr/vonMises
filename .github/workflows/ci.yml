@@ -32,12 +32,11 @@ jobs:
 
     - name: Build
       run: |
-        mkdir build
-        cd build
-        cmake ..
-        cmake --build .
-        cd ..
+        source /usr/share/miniconda/etc/profile.d/conda.sh
+        conda activate vonMises
         python install.py
+        cat build.log
+        vonMises -m test-data/MATRIX.mat -k A
 
     - name: Code Lint
       run: |
