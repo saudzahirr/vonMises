@@ -20,4 +20,4 @@ jobs:
         cmake ..
         cmake --build .
         cd ..
-        ./build/vonMises -m test-data/MATRIX.mat -k A
+        vonMises -m test-data/MATRIX.mat -k A
