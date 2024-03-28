@@ -29,7 +29,7 @@ jobs:
         cmake --build .
         cd ..
         python install.py
-        ./build/vonMises -m test-data/MATRIX.mat -k A
+        vonMises -m test-data/MATRIX.mat -k A
 
     - name: Code Lint
       run: |
