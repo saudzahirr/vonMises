@@ -20,6 +20,14 @@ jobs:
         activate-environment: vonMises
         environment-file: environment.yml
 
+    - name: Initialize Conda
+      run: |
+        /usr/share/miniconda/bin/conda init bash
+        eval "$(/usr/share/miniconda/bin/conda shell.bash hook)"
+
+    - name: Activate Conda environment
+      run: conda activate vonMises
+
     - name: Build
       run: |
         mkdir build
@@ -31,7 +39,6 @@ jobs:
 
     - name: Code Lint
       run: |
-        conda activate vonMises
         ruff version
         ruff format --check .
         ruff check --output-format=github .
