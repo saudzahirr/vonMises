@@ -6,7 +6,13 @@ __pycache__
 _skbuild/
 dist/
 build/
+<<<<<<< HEAD
+_skbuild/
 lib/
+_cmake_test_compile/
+=======
+lib/
+>>>>>>> master
 
 _version.py
 *.log

@@ -17,5 +17,3 @@ dependencies:
   - ruff
   - pytest
   - tqdm
-  - pip:
-  - - -r requirements.txt
