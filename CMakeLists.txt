@@ -19,4 +19,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fopenmp")
 
 add_library(eigen SHARED ${SOURCES})
 
+<<<<<<< HEAD
 install(TARGETS eigen LIBRARY DESTINATION lib)
+=======
+add_library(eigen SHARED ${SOURCES})
+>>>>>>> master
