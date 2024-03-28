@@ -13,12 +13,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Set up Conda Environment
-      run: |
-        conda env create -f environment.yml
-        /usr/share/miniconda/bin/conda init
-        /usr/share/miniconda/bin/conda activate vonMises
+
+    - name: Setup Conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment: vonMises
+        environment-file: environment.yml
 
     - name: Build
       run: |
