@@ -32,6 +32,7 @@ jobs:
 
     - name: Code Lint
       run: |
+        conda init
         conda activate vonMises
         ruff version
         ruff format --check .
