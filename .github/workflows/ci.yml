@@ -27,8 +27,8 @@ jobs:
 
     - name: Activate Conda environment
       run: |
+        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vonMises
-        echo "Conda environment activated"
 
     - name: Build
       run: |
@@ -41,6 +41,7 @@ jobs:
 
     - name: Code Lint
       run: |
+        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vonMises
         ruff version
         ruff format --check .
