@@ -9,6 +9,7 @@ requires = [
 ]
 
 [project]
+name = "vonMises"
 authors = [{name = "Saud Zahir", email = "m.saud.zahir@gmail.com"}]
 classifiers = [
   "Programming Language :: Python :: 3",
@@ -19,7 +20,6 @@ classifiers = [
 description = "Numerical Algorithm for Eigen Value Problems."
 keywords = ["numerical"]
 license = {file = "LICENSE"}
-name = "vonMises"
 requires-python = ">=3.11"
 dynamic = ["version"]
 
@@ -30,7 +30,7 @@ dynamic = ["version"]
 "vonMises" = "src.__main__:main"
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["."]
 
 [tool.setuptools_scm]
 version_file = "src/_version.py"
