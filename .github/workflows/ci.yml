@@ -35,6 +35,7 @@ jobs:
         source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
         python install.py
+        pip install dist/*
         cat build.log
         vonMises -m test/test-data/MATRIX.mat -k A
 
