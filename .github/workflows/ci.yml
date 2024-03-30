@@ -17,7 +17,7 @@ jobs:
     - name: Setup Conda
       uses: conda-incubator/setup-miniconda@v2
       with:
-        activate-environment: vonMises
+        activate-environment: vm
         environment-file: environment.yml
 
     - name: Initialize Conda
@@ -28,20 +28,25 @@ jobs:
     - name: Activate Conda environment
       run: |
         source /usr/share/miniconda/etc/profile.d/conda.sh
-        conda activate vonMises
+        conda activate vm
 
     - name: Build
       run: |
         source /usr/share/miniconda/etc/profile.d/conda.sh
-        conda activate vonMises
+        conda activate vm
         python install.py
         cat build.log
-        vonMises -m test-data/MATRIX.mat -k A
+        vonMises -m test/test-data/MATRIX.mat -k A
+
+    - name: Unittest
+      run: |
+        conda activate vm
+        pytest -s test/unit-test
 
     - name: Code Lint
       run: |
         source /usr/share/miniconda/etc/profile.d/conda.sh
-        conda activate vonMises
+        conda activate vm
         ruff version
         ruff format --check .
         ruff check --output-format=github .
