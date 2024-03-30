@@ -42,7 +42,6 @@ def main():
 
     try:
         A = utils.mat_to_array(args.mat, args.key)
-        print(A)
         solver.solve(A)
     except ValueError as e:
         print(f"Error: {e}")

@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -22,32 +22,27 @@ jobs:
 
     - name: Initialize Conda
       run: |
-        conda init bash
-        source ~/.bashrc
+        conda init
 
     - name: Activate Conda environment
       run: |
-        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
 
     - name: Build
       run: |
-        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
         python install.py
         pip install dist/*
-        cat build.log
+        Get-Content build.log
         vonMises -m test/test-data/MATRIX.mat -k A
 
     - name: Unittest
       run: |
-        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
         pytest -s test/unit-test
 
     - name: Code Lint
       run: |
-        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
         ruff version
         ruff format --check .
