@@ -14,7 +14,7 @@ authors = [{name = "Saud Zahir", email = "m.saud.zahir@gmail.com"}]
 classifiers = [
   "Programming Language :: Python :: 3",
   "Programming Language :: C++ :: 11",
-  "License :: proprietary",
+  "License :: MIT",
   "Operating System :: Linux",
 ]
 description = "Numerical Algorithm for Eigen Value Problems."

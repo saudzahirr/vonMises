@@ -3,6 +3,10 @@ project(vonMises)
 
 set(CMAKE_CXX_STANDARD 11)
 
+if(SKBUILD)
+  message(STATUS "The project is built using scikit-build")
+endif()
+
 set(SOURCES
     src/eigenlib/eigen_API.cpp
     src/eigenlib/logger.cpp
