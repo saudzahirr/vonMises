@@ -36,7 +36,16 @@ jobs:
         conda activate vonMises
         python install.py
         cat build.log
+<<<<<<< Updated upstream
         vonMises -m test-data/MATRIX.mat -k A
+=======
+        vonMises -m test/test-data/MATRIX.mat -k A
+
+    - name: Unittest
+      run: |
+        conda activate vm
+        pytest -s test/unit-test
+>>>>>>> Stashed changes
 
     - name: Code Lint
       run: |
