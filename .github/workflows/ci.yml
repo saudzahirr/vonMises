@@ -36,6 +36,7 @@ jobs:
         conda activate vm
         python install.py
         cat build.log
+        vonMises -m test/test-data/MATRIX.mat -k A
 
     - name: Unittest
       run: |
@@ -45,7 +46,7 @@ jobs:
     - name: Code Lint
       run: |
         source /usr/share/miniconda/etc/profile.d/conda.sh
-        conda activate vonMises
+        conda activate vm
         ruff version
         ruff format --check .
         ruff check --output-format=github .
