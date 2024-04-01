@@ -83,27 +83,6 @@ void sleep(int seconds) {
     while (time(nullptr) < targetTime);
 }
 
-string executeCommand(const char* cmd) {
-    array<char, 128> buffer;
-    string result;
-    unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
-    if (!pipe) {
-        throw runtime_error("popen() failed!");
-    }
-    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
-        result += buffer.data();
-    }
-    return result;
-}
-
-string getGPPVersion() {
-    return executeCommand("g++ --version");
-}
-
-string getCMakeVersion() {
-    return executeCommand("cmake --version");
-}
-
 void logSystemInfoOnce() {
     static bool systemInfoLogged = false;
     if (!systemInfoLogged) {
@@ -117,9 +96,14 @@ void logSystemInfoOnce() {
 
         strftime(buffer, sizeof(buffer), "Date %d-%b-%Y   Time %H:%M:%S", timeInfo);
 
-        string systemInfo = "CMake Version: " + getCMakeVersion() + "\n" +
-                            + "G++ Version: " + getGPPVersion() + "\n" +
-                            + "OMP max threads: " + to_string(omp_get_max_threads());
+        string systemInfo;
+        stringstream ss;
+
+        ss << "CMake Version: " << CMake_VERSION << "\n"
+           << "GCC Version: " << gcc_VERSION << "\n"
+           << "OMP max threads: " << to_string(omp_get_max_threads()) << "\n";
+
+        systemInfo = ss.str();
 
         ofstream logFile("vonMises.log", ios::out);
         if (logFile.is_open()) {

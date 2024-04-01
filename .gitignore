@@ -10,6 +10,7 @@ lib/
 _cmake_test_compile/
 
 _version.py
+version.h
 *.log
 
 

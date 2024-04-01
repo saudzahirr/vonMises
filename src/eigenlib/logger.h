@@ -15,6 +15,7 @@
     #include <Windows.h>
 #endif
 
+#include "version.h"
 
 using namespace std;
 
