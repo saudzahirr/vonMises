@@ -21,6 +21,11 @@ include_directories(src/lib)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fopenmp")
 
+configure_file(
+  "${PROJECT_SOURCE_DIR}/src/eigenlib/version.h.in"
+  "${PROJECT_SOURCE_DIR}/src/eigenlib/version.h"
+)
+
 add_library(eigen SHARED ${SOURCES})
 
 install(TARGETS eigen LIBRARY DESTINATION lib)
