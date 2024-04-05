@@ -4,7 +4,7 @@ import time
 from pathlib import Path
 
 if sys.platform == "win32":
-    shared_file_path = Path(sys.prefix, "lib", "eigen.dll")
+    shared_file_path = Path(sys.prefix, "bin", "eigen.dll")
     eigen_lib = ctypes.CDLL(str(shared_file_path), winmode=0)
 elif sys.platform == "linux":
     shared_file_path = Path(sys.prefix, "lib", "libeigen.so")
