@@ -1,0 +1,2 @@
+recursive-exclude src *.cpp
+recursive-exclude src *.h
