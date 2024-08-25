@@ -32,6 +32,7 @@ jobs:
 
     - name: Build
       run: |
+        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
         python install.py
         pip install dist/*
@@ -40,11 +41,13 @@ jobs:
 
     - name: Unittest
       run: |
+        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
         pytest -s test/unit-test
 
     - name: Code Lint
       run: |
+        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
         ruff version
         ruff format --check .
