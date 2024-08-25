@@ -31,11 +31,11 @@ jobs:
 
     - name: Activate Conda environment
       run: |
+        conda init
         conda activate vm
 
     - name: Build
       run: |
-        conda activate vm
         python install.py
         pip install dist/*
         cat build.log
@@ -43,12 +43,10 @@ jobs:
 
     - name: Unittest
       run: |
-        conda activate vm
         pytest -s test/unit-test
 
     - name: Code Lint
       run: |
-        conda activate vm
         ruff version
         ruff format --check .
         ruff check --output-format=github .
