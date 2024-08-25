@@ -26,23 +26,23 @@ jobs:
 
     - name: Build
       run: |
+        source $CONDA_PREFIX/etc/profile.d/conda.sh
         conda activate vm
         python install.py
         pip install dist/*
         cat build.log
         vonMises -m test/test-data/MATRIX.mat -k A
-      shell: bash
 
     - name: Unittest
       run: |
+        source $CONDA_PREFIX/etc/profile.d/conda.sh
         conda activate vm
         pytest -s test/unit-test
-      shell: bash
 
     - name: Code Lint
       run: |
+        source $CONDA_PREFIX/etc/profile.d/conda.sh
         conda activate vm
         ruff version
         ruff format --check .
         ruff check --output-format=github .
-      shell: bash
