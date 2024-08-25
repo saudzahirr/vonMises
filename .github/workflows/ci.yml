@@ -26,12 +26,7 @@ jobs:
 
     - name: Initialize Conda
       run: |
-        conda init bash
         source ~/.bashrc
-
-    - name: Activate Conda environment
-      run: |
-        conda init
         conda activate vm
 
     - name: Build
