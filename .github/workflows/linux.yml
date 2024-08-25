@@ -25,14 +25,9 @@ jobs:
       run: |
         conda env create -f environment.yml
 
-    - name: Initialize Conda
-      run: |
-        echo "Initializing Conda..."
-        source $(conda info --base)/etc/profile.d/conda.sh
-
     - name: Build
       run: |
-        source /usr/share/miniconda/etc/profile.d/conda.sh
+        source $(conda info --base)/etc/profile.d/conda.sh
         conda activate vm
         python install.py
         pip install dist/*
@@ -41,13 +36,13 @@ jobs:
 
     - name: Unittest
       run: |
-        source /usr/share/miniconda/etc/profile.d/conda.sh
+        source $(conda info --base)/etc/profile.d/conda.sh
         conda activate vm
         pytest -s test/unit-test
 
     - name: Code Lint
       run: |
-        source /usr/share/miniconda/etc/profile.d/conda.sh
+        source $(conda info --base)/etc/profile.d/conda.sh
         conda activate vm
         ruff version
         ruff format --check .
