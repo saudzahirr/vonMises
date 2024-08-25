@@ -24,13 +24,10 @@ jobs:
         activate-environment: vm
         environment-file: environment.yml
 
-    - name: Initialize Conda
-      run: |
-        source ~/.bashrc
-        conda activate vm
-
     - name: Build
       run: |
+        source $CONDA_PREFIX/etc/profile.d/conda.sh
+        conda activate vm
         python install.py
         pip install dist/*
         cat build.log
@@ -38,10 +35,14 @@ jobs:
 
     - name: Unittest
       run: |
+        source $CONDA_PREFIX/etc/profile.d/conda.sh
+        conda activate vm
         pytest -s test/unit-test
 
     - name: Code Lint
       run: |
+        source $CONDA_PREFIX/etc/profile.d/conda.sh
+        conda activate vm
         ruff version
         ruff format --check .
         ruff check --output-format=github .
