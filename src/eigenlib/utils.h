@@ -1,43 +1,30 @@
+/*
+ * Copyright (c) 2024 Saud Zahir
+ *
+ * This file is part of vonMises.
+ *
+ * vonMises is free software; you can redistribute it and/or
+ * modify it under the terms of the MIT License.
+ *
+ * vonMises is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the MIT
+ * License for more details.
+ */
+
+
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <cmath>
-#include <iostream>
-#include <sstream>
-#include <iomanip>
-
-using namespace std;
+#include <Eigen/Dense>
 
 #define ITERATIONS 1000
 #define TOLERANCE 1E-32
-#define PI M_PI
 
+using namespace std;
+using namespace Eigen;
 
-double** matrixSub(double** A, double** B, int n, int m);
-
-double** matrixProduct(double** A, int rowsA, int colsA, double** B, int rowsB, int colsB);
-
-double** matrixScalarProduct(double** A, int m, int n, double c);
-
-double* vectorProduct(double** A, int rowsA, int colsA, double* v, int rowsB);
-
-double** outerProduct(double* vectorA, int m, double* vectorB, int n);
-
-double Dot(double* vectorA, double* vectorB, int n);
-
-double Norm(double* x, int n);
-
-double Max(double* x, int n);
-
-double Min(double* x, int n);
-
-double* divideVector(double* v, int n, double s);
-
-void cleanMatrix(double** matrix, int rows);
-
-string getMatrixString(double** matrix, int rows, int cols, int cellSize);
-
-string getVectorString(double* vector, int n);
-
+VectorXd convertToEigenVector(double* array, size_t size);
+MatrixXd convertToEigenMatrix(double** array, size_t size);
 
 #endif

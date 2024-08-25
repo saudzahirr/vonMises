@@ -1,17 +1,29 @@
+/*
+ * Copyright (c) 2024 Saud Zahir
+ *
+ * This file is part of vonMises.
+ *
+ * vonMises is free software; you can redistribute it and/or
+ * modify it under the terms of the MIT License.
+ *
+ * vonMises is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the MIT
+ * License for more details.
+ */
+
+
 #include "von_mises.h"
 
 
-double* VonMisesIterationMethod(double** A, int n) {
-    clock_t time_req;
-    time_req = clock();
+VectorXd vonMisesIterationMethod(const MatrixXd& A) {
 
-    INFO_OUT("Starting Von Mises Method ...");
-    DEBUG_OUT("Matrix A: \n" + getMatrixString(A, n, n, 8));
+    INFO("Starting Von Mises Method ...");
+    INFO("Initializing random vector for Von Mises iteration ...");
 
-    INFO_OUT("Initializing random vector for Von Mises iteration ...");
-
-    double* x = new double[n];
-    double* u = new double[n];
+    int n = A.rows();
+    VectorXd x = VectorXd::Zero(n);
+    VectorXd u = VectorXd::Zero(n);
 
     random_device rd;
     mt19937 gen(rd());
@@ -23,43 +35,25 @@ double* VonMisesIterationMethod(double** A, int n) {
     normal_distribution<double> distribution(mean, stddev);
 
     // Generate random numbers from the normal distribution
-    for (int i = 0; i < n; ++i) {
+    for (size_t i = 0; i < n; ++i) {
         double random_number = distribution(gen);
         random_number = max(0.0, min(1.0, random_number));
-        x[i] = random_number;
+        x(i) = random_number;
     }
 
-    DEBUG_OUT("x0 = " + getVectorString(x, n));
-
-    // Von Mises iterative formula.
+    // Von Mises iterative formula
     for (int a = 1; a <= ITERATIONS; ++a) {
         u = x;
-        x = vectorProduct(A, n, n, x, n);
-        // x = divideVector(x, n, Max(x, n));
-        x = divideVector(x, n, Norm(x, n));
+        x = A * x;  // Matrix-vector multiplication
+        x.normalize();  // Normalize the vector
 
-        double change = 0.0;
-        for (int i = 0; i < n; ++i) {
-            change += abs(x[i] - u[i]);
-            if (change == 0) {
-                INFO_OUT("Dominant Eigenvector converged at " + to_string(a) + " iterations.");
+        double epsilon = (x - u).norm();
+        if (epsilon == 0 || epsilon < TOLERANCE) {
+            DEBUG("Dominant Eigenvector converged at {} iterations.", a);
 
-                DEBUG_OUT("x = " + getVectorString(x, n));
-
-                time_req = clock() - time_req;
-                INFO_OUT("Execution time for Von Mises Method: "
-                        + formatPrecision(time_req/CLOCKS_PER_SEC) + " seconds");
-                delete u;
-                return x;
-            }
+            return x;
         }
     }
 
-    DEBUG_OUT("x = " + getVectorString(x, n));
-
-    time_req = clock() - time_req;
-    INFO_OUT("Execution time for Von Mises Method: "
-            + formatPrecision(time_req/CLOCKS_PER_SEC) + " seconds");
-    delete u;
     return x;
 }
