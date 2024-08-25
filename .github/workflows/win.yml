@@ -1,12 +1,12 @@
-name: Windows Build and Test
+name: Linux Build and Test
 
 on:
   push:
-    branches:
+    branches: 
       - master
       - Fix-ci/cd-pipeline
   pull_request:
-    branches:
+    branches: 
       - master
       - Fix-ci/cd-pipeline
 
@@ -17,11 +17,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Conda
-      uses: msys2/setup-msys2@v1
-      with:
-        msys_packages: 'conda'
-
     - name: Create Environment
       run: |
         conda env create -f environment.yml
@@ -31,15 +26,13 @@ jobs:
         conda activate vm
         python install.py
         pip install dist/*
-        type build.log
+        cat build.log
         vonMises -m test/test-data/MATRIX.mat -k A
-      shell: pwsh
 
     - name: Unittest
       run: |
         conda activate vm
         pytest -s test/unit-test
-      shell: pwsh
 
     - name: Code Lint
       run: |
@@ -47,4 +40,3 @@ jobs:
         ruff version
         ruff format --check .
         ruff check --output-format=github .
-      shell: pwsh
