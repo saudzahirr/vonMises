@@ -2,9 +2,13 @@ name: Linux Build and Test
 
 on:
   push:
-    branches: [ "master" ]
+    branches: 
+      - master
+      - Fix-ci/cd-pipeline
   pull_request:
-    branches: [ "master" ]
+    branches: 
+      - master
+      - Fix-ci/cd-pipeline
 
 jobs:
   build:
@@ -12,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Setup Conda
-      uses: conda-incubator/setup-miniconda@v2
+      uses: conda-incubator/setup-miniconda@v3
       with:
         activate-environment: vm
         environment-file: environment.yml
@@ -27,12 +31,10 @@ jobs:
 
     - name: Activate Conda environment
       run: |
-        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
 
     - name: Build
       run: |
-        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
         python install.py
         pip install dist/*
@@ -41,13 +43,11 @@ jobs:
 
     - name: Unittest
       run: |
-        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
         pytest -s test/unit-test
 
     - name: Code Lint
       run: |
-        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
         ruff version
         ruff format --check .
