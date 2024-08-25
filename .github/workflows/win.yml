@@ -1,0 +1,50 @@
+name: Windows Build and Test
+
+on:
+  push:
+    branches:
+      - master
+      - Fix-ci/cd-pipeline
+  pull_request:
+    branches:
+      - master
+      - Fix-ci/cd-pipeline
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Conda
+      uses: msys2/setup-msys2@v1
+      with:
+        msys_packages: 'conda'
+
+    - name: Create Environment
+      run: |
+        conda env create -f environment.yml
+
+    - name: Build
+      run: |
+        conda activate vm
+        python install.py
+        pip install dist/*
+        type build.log
+        vonMises -m test/test-data/MATRIX.mat -k A
+      shell: pwsh
+
+    - name: Unittest
+      run: |
+        conda activate vm
+        pytest -s test/unit-test
+      shell: pwsh
+
+    - name: Code Lint
+      run: |
+        conda activate vm
+        ruff version
+        ruff format --check .
+        ruff check --output-format=github .
+      shell: pwsh
