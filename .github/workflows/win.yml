@@ -1,4 +1,4 @@
-name: Linux Build and Test
+name: Windows Build and Test
 
 on:
   push:
@@ -17,22 +17,24 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Set up Miniconda
+      uses: conda-incubator/setup-miniconda@v2
+
     - name: Create Environment
-      run: |
-        conda env create -f environment.yml
+      run: conda env create -f environment.yml
 
     - name: Build
       run: |
         conda activate vm
         python install.py
-        pip install dist/*
-        cat build.log
-        vonMises -m test/test-data/MATRIX.mat -k A
+        pip install dist\*
+        type build.log
+        vonMises -m test\test-data\MATRIX.mat -k A
 
     - name: Unittest
       run: |
         conda activate vm
-        pytest -s test/unit-test
+        pytest -s test\unit-test
 
     - name: Code Lint
       run: |
