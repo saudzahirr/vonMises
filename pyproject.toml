@@ -5,6 +5,8 @@ requires = [
   "scikit-build",
   "cmake",
   "ninja",
+  "numpy",
+  "scipy",
 ]
 
 [project]
@@ -17,8 +19,8 @@ classifiers = [
   "License :: MIT",
   "Operating System :: Linux",
 ]
-description = "Numerical Algorithm for Eigen Value Problems."
-keywords = ["numerical"]
+description = "Numerical Algorithm for Eigenvalue Problems using Rayleigh Quotient and von Mises Iteration with Deflation."
+keywords = ["numerical", "eigenvalues", "rayleigh", "von_mises"]
 license = {file = "LICENSE"}
 requires-python = ">=3.11"
 

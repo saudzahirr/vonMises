@@ -1,18 +1,27 @@
+/*
+ * Copyright (c) 2024 Saud Zahir
+ *
+ * This file is part of vonMises.
+ *
+ * vonMises is free software; you can redistribute it and/or
+ * modify it under the terms of the MIT License.
+ *
+ * vonMises is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the MIT
+ * License for more details.
+ */
+
+
 #include "rayleigh_quotient.h"
 
-double RayleighQuotient(double** A, double* x, int n) {
-    clock_t time_req;
-    time_req = clock();
 
-    INFO_OUT("Calculating eigenvalue using Rayleigh Quotient ...");
+double rayleighQuotient(const MatrixXd& A, const VectorXd& x) {
+    INFO("Calculating eigenvalue using Rayleigh Quotient ...");
 
-    double k = Dot(vectorProduct(A, n, n, x, n), x, n) / Norm(x, n);
+    double k = (A * x).dot(x) / x.dot(x);
 
-    DEBUG_OUT("Eigenvalue: " + to_string(k));
-
-    time_req = clock() - time_req;
-    INFO_OUT("Execution time for calculating eigenvalue: "
-            + formatPrecision(time_req/CLOCKS_PER_SEC) + " seconds");
+    DEBUG("Eigenvalue: {}", k);
 
     return k;
-};
+}
