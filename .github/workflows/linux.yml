@@ -25,6 +25,11 @@ jobs:
       run: |
         conda env create -f environment.yml
 
+    - name: Initialize Conda
+      run: |
+        echo "Initializing Conda..."
+        source $(conda info --base)/etc/profile.d/conda.sh
+
     - name: Build
       run: |
         conda activate vm
