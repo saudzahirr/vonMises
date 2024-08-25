@@ -8,7 +8,7 @@ from pathlib import Path
 wheel_cmd = shlex.split("python -m pip wheel . -v -w dist ")
 install_cmd = shlex.split("pip install . -v")
 develop_cmd = shlex.split("pip install -e . -v")
-build_cmd = shlex.split("python -m build -n -x --wheel")
+build_cmd = shlex.split("python -m build --wheel")
 
 
 def main(args=sys.argv[1:]):
@@ -35,7 +35,7 @@ def main(args=sys.argv[1:]):
 
     if args.mode == "wheel":
         print("Starting wheel build")
-        run_command(wheel_cmd)
+        run_command(build_cmd)
 
     elif args.mode == "install":
         print("Starting install")
