@@ -14,19 +14,19 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Setup Conda
-      uses: conda-incubator/setup-miniconda@v3
-      with:
-        activate-environment: vm
-        environment-file: environment.yml
+    - name: Create Environment
+      run: |
+        conda env create -f environment.yml
 
     - name: Build
       run: |
-        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
         python install.py
         pip install dist/*
@@ -35,13 +35,11 @@ jobs:
 
     - name: Unittest
       run: |
-        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
         pytest -s test/unit-test
 
     - name: Code Lint
       run: |
-        source /usr/share/miniconda/etc/profile.d/conda.sh
         conda activate vm
         ruff version
         ruff format --check .
