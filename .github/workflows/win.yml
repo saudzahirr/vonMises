@@ -26,10 +26,9 @@ jobs:
     - name: Build
       run: |
         conda activate vm
-        python install.py
+        python install.py install
         pip install dist\*
         type build.log
-        where eigen.dll
         vonMises -m test\test-data\MATRIX.mat -k A
 
     - name: Unittest
