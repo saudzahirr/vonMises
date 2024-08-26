@@ -5,8 +5,6 @@ requires = [
   "scikit-build",
   "cmake",
   "ninja",
-  "numpy",
-  "scipy",
 ]
 
 [project]
@@ -23,6 +21,10 @@ description = "Numerical Algorithm for Eigenvalue Problems using Rayleigh Quotie
 keywords = ["numerical", "eigenvalues", "rayleigh", "von_mises"]
 license = {file = "LICENSE"}
 requires-python = ">=3.11"
+dependencies = [
+  "numpy",
+  "scipy",
+]
 
 [project.urls]
 "Homepage" = "https://github.com/saudzahirr/vonMises"
