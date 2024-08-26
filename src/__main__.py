@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import argparse
-from src import eigen, utils, __version__
+from src import eigen, lib, utils, __version__
 import sys
 
 
@@ -38,7 +38,7 @@ def main():
         print("vonMises -m <.mat> -k <key>\n")
         parser.error("You must provide both -m and -k arguments.")
 
-    solver = eigen.EigenValueProblem(eigen.eigen_lib)
+    solver = eigen.EigenValueProblem(lib.eigen_lib)
 
     try:
         A = utils.mat_to_array(args.mat, args.key)
