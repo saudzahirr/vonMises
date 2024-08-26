@@ -17,39 +17,39 @@ if(OpenMP_CXX_FOUND)
 endif()
 
 set(SOURCES
-    src/eigenlib/eigen_API.cpp
-    src/eigenlib/logger.cpp
-    src/eigenlib/rayleigh_quotient.cpp
-    src/eigenlib/utils.cpp
-    src/eigenlib/von_mises.cpp
+    src/vonmiseslib/vonMises_API.cpp
+    src/vonmiseslib/logger.cpp
+    src/vonmiseslib/rayleigh_quotient.cpp
+    src/vonmiseslib/utils.cpp
+    src/vonmiseslib/von_mises.cpp
 )
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/src/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/src/vonmises/lib)
 
-include_directories(src/lib)
+include_directories(src/vonmises/lib)
 
 # Add subdirectory for third-party libraries
-add_subdirectory(src/eigenlib/thirdParty)
+add_subdirectory(src/vonmiseslib/thirdParty)
 
 # Include directories for Eigen and fmt
-include_directories(src/eigenlib/thirdParty/Eigen_3.4.0)
-include_directories(src/eigenlib/thirdParty/fmt-10.2.1/include)
+include_directories(src/vonmiseslib/thirdParty/Eigen_3.4.0)
+include_directories(src/vonmiseslib/thirdParty/fmt-10.2.1/include)
 
 configure_file(
-  "${PROJECT_SOURCE_DIR}/src/eigenlib/version.h.in"
-  "${PROJECT_SOURCE_DIR}/src/eigenlib/version.h"
+  "${PROJECT_SOURCE_DIR}/src/vonmiseslib/version.h.in"
+  "${PROJECT_SOURCE_DIR}/src/vonmiseslib/version.h"
 )
 
 # Add shared library target for your main project
-add_library(eigen SHARED ${SOURCES})
+add_library(vonmises SHARED ${SOURCES})
 
-# Link the fmt static library with your eigen shared library
-target_link_libraries(eigen PRIVATE fmt)
+# Link the fmt static library with your vonmises shared library
+target_link_libraries(vonmises PRIVATE fmt)
 
 # Link OpenMP if found
 if(OpenMP_CXX_FOUND)
-    target_link_libraries(eigen PRIVATE OpenMP::OpenMP_CXX)
+    target_link_libraries(vonmises PRIVATE OpenMP::OpenMP_CXX)
 endif()
 
-# Install the eigen library
-install(TARGETS eigen LIBRARY DESTINATION lib)
+# Install the vonmises library
+install(TARGETS vonmises LIBRARY DESTINATION lib)
