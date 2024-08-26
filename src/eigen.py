@@ -13,7 +13,7 @@ License for more details.
 """
 
 import ctypes
-from lib import eigen_lib
+from src.lib import eigen_lib
 
 
 class EigenValueProblem:
