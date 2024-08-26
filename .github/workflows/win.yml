@@ -29,6 +29,7 @@ jobs:
         python install.py
         pip install dist\*
         type build.log
+        where eigen.dll
         vonMises -m test\test-data\MATRIX.mat -k A
 
     - name: Unittest
