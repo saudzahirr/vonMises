@@ -36,9 +36,10 @@ if sys.platform == "win32":
         get_python_exe(),
         "Lib",
         "site-packages",
-        "src",
+        "vonmises",
         "lib",
-        f"vonMises.cp{sys_version}-win_amd64.dll",
+        "bin",
+        f"libvonmises.dll",
     )
     os.add_dll_directory(str(shared_file_path))
 elif sys.platform == "linux":
