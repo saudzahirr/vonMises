@@ -13,7 +13,7 @@ License for more details.
 """
 
 import ctypes
-from src.lib import eigen_lib
+from vonmises.lib import vonmises_lib
 
 
 class EigenValueProblem:
@@ -53,7 +53,7 @@ class EigenValueProblem:
 
 
 def eigen(A):
-    return EigenValueProblem(eigen_lib).solve(A)
+    return EigenValueProblem(vonmises_lib).solve(A)
 
 
 def eigenvalues(A):

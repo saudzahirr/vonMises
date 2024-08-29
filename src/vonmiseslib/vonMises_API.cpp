@@ -13,7 +13,7 @@
  */
 
 
-#include "eigen_API.h"
+#include "vonMises_API.h"
 
 /**
  * @file

@@ -5,10 +5,10 @@ import sys
 from argparse import ArgumentParser
 from pathlib import Path
 
-wheel_cmd = shlex.split("python -m pip wheel . -v -w dist ")
+wheel_cmd = shlex.split("python -m build -n -x --wheel")
+build_cmd = shlex.split("pip wheel . -v -w dist ")
 install_cmd = shlex.split("pip install . -v")
 develop_cmd = shlex.split("pip install -e . -v")
-build_cmd = shlex.split("python -m build --wheel")
 
 
 def main(args=sys.argv[1:]):
