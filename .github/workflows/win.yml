@@ -24,6 +24,7 @@ jobs:
       run: conda env create -f environment.yml
 
     - name: Build
+      shell: cmd
       run: |
         conda activate vm
         python install.py install
@@ -45,9 +46,15 @@ jobs:
         ruff check --output-format=github .
 
     - name: Archive VM Environment
+      shell: bash
       run: |
-        echo $CONDA_PREFIX
-        tar -czf vm-env.tar.gz -C $CONDA_PREFIX .
+        echo "Conda Prefix: $CONDA_PREFIX"
+        if [ -d "$CONDA_PREFIX" ]; then
+          tar -czf vm-env.tar.gz -C $CONDA_PREFIX .
+        else
+          echo "Conda environment not found!"
+          exit 1
+        fi
       continue-on-error: true
       if: always()
 
