@@ -43,6 +43,7 @@ jobs:
 
     - name: Archive Logs
       uses: actions/upload-artifact@v3
+      if: always()
       with:
         name: test-logs
         path: |
