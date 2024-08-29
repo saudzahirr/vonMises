@@ -12,7 +12,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -30,9 +29,7 @@ jobs:
         source $(conda info --base)/etc/profile.d/conda.sh
         conda activate vm
         python install.py install
-        pip install dist/*
-        cat build.log
-        vonMises -m test/test-data/MATRIX.mat -k A
+        vonMises -m test/test-data/MATRIX.mat -k A > vonMises.log 2>&1
 
     - name: Unittest
       run: |
@@ -47,3 +44,13 @@ jobs:
         ruff version
         ruff format --check .
         ruff check --output-format=github .
+
+    - name: Archive Logs
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-logs
+        path: |
+          build.log
+          vonMises.log
+          test/unit-test.log
+          test/*.log

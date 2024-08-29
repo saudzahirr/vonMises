@@ -2,11 +2,11 @@ name: Windows Build and Test
 
 on:
   push:
-    branches: 
+    branches:
       - master
       - Fix-ci/cd-pipeline
   pull_request:
-    branches: 
+    branches:
       - master
       - Fix-ci/cd-pipeline
 
@@ -24,14 +24,10 @@ jobs:
       run: conda env create -f environment.yml
 
     - name: Build
-      shell: cmd
       run: |
         conda activate vm
         python install.py install
-        pip install dist\*
-        type build.log
-        dir C:\Miniconda\envs\vm /s
-        vonMises -m test\test-data\MATRIX.mat -k A
+        vonMises -m test\test-data\MATRIX.mat -k A > vonMises.log 2>&1
 
     - name: Unittest
       run: |
@@ -45,33 +41,12 @@ jobs:
         ruff format --check .
         ruff check --output-format=github .
 
-    - name: Archive VM Environment
-      shell: bash
-      run: |
-        echo "Conda Prefix: $CONDA_PREFIX"
-        if [ -d "$CONDA_PREFIX" ]; then
-          tar -czf vm-env.tar.gz -C $CONDA_PREFIX .
-        else
-          echo "Conda environment not found!"
-          exit 1
-        fi
-      continue-on-error: true
-      if: always()
-
-    - name: Upload VM Environment
+    - name: Archive Logs
       uses: actions/upload-artifact@v3
       with:
-        name: vm-environment
-        path: vm-env.tar.gz
-
-    - name: Archive Source Directory
-      run: |
-        tar --exclude=source-dir.tar.gz -czf source-dir.tar.gz .
-      continue-on-error: true
-      if: always()
-
-    - name: Upload Source Directory
-      uses: actions/upload-artifact@v3
-      with:
-        name: source-directory
-        path: source-dir.tar.gz
+        name: test-logs
+        path: |
+          build.log
+          vonMises.log
+          test\unit-test.log
+          test\*.log
