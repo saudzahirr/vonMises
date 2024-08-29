@@ -2,7 +2,7 @@ import os
 import unittest
 import numpy as np
 from scipy.io import loadmat
-from src.utils import array_to_mat
+from vonmises.utils import array_to_mat
 
 test_mat_key = "A"
 test_array = np.array(

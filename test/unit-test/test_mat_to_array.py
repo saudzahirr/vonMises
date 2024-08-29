@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from src.utils import mat_to_array
+from vonmises.utils import mat_to_array
 
 test_matfile_path = "test/test-data/MATRIX.mat"
 test_mat_key = "A"
