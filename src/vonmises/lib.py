@@ -13,38 +13,18 @@ License for more details.
 """
 
 import ctypes
-import os
-import site
 import sys
 from pathlib import Path
 
 
-def get_python_exe():
-    return sys.executable
-
-
 sys_version = f"{sys.version_info.major}{sys.version_info.minor}"
 if sys.platform == "win32":
-    # shared_file_path = Path(sys.prefix, "lib", "eigen.dll")
-    # eigen_lib = ctypes.CDLL(str(shared_file_path), winmode=0)
     shared_file_path = Path(
-        get_python_exe(),
-        "Lib",
-        "site-packages",
-        "vonmises",
-        "lib",
+        sys.prefix,
         "bin",
         "libvonmises.dll",
     )
-    os.add_dll_directory(str(shared_file_path))
+    vonmises_lib = ctypes.CDLL(str(shared_file_path), winmode=0)
 elif sys.platform == "linux":
-    # shared_file_path = Path(sys.prefix, "lib", "libeigen.so")
-    # eigen_lib = ctypes.CDLL(str(shared_file_path))
-    shared_file_path = Path(
-        site.getsitepackages()[0],
-        "vonmises",
-        "lib",
-        "libvonmises.so",
-    )
-
-vonmises_lib = ctypes.CDLL(str(shared_file_path), ctypes.RTLD_GLOBAL)
+    shared_file_path = Path(sys.prefix, "lib", "libvonmises.so")
+    vonmises_lib = ctypes.CDLL(str(shared_file_path), ctypes.RTLD_GLOBAL)
