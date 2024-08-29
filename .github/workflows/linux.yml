@@ -12,38 +12,57 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash -l {0}
 
     steps:
     - uses: actions/checkout@v4
 
+    - name: Set up Miniconda
+      uses: conda-incubator/setup-miniconda@v2
+
     - name: Create Environment
-      run: |
-        conda env create -f environment.yml
+      run: conda env create -f environment.yml
 
     - name: Build
       run: |
-        source $(conda info --base)/etc/profile.d/conda.sh
         conda activate vm
         python install.py install
-        pip install dist/*
+        pip install dist\*
         cat build.log
         vonMises -m test/test-data/MATRIX.mat -k A
 
     - name: Unittest
       run: |
-        source $(conda info --base)/etc/profile.d/conda.sh
         conda activate vm
         pytest -s test/unit-test
 
     - name: Code Lint
       run: |
-        source $(conda info --base)/etc/profile.d/conda.sh
         conda activate vm
         ruff version
         ruff format --check .
         ruff check --output-format=github .
+
+    - name: Archive VM Environment
+      run: |
+        tar -czf vm-env.tar.gz $CONDA_PREFIX
+      continue-on-error: true
+      if: always()
+      
+    - name: Upload VM Environment
+      uses: actions/upload-artifact@v3
+      with:
+        name: vm-environment
+        path: vm-env.tar.gz
+
+    - name: Archive Source Directory
+      run: |
+        tar -czf source-dir.tar.gz .
+      continue-on-error: true
+      if: always()
+        
+    - name: Upload Source Directory
+      uses: actions/upload-artifact@v3
+      with:
+        name: source-directory
+        path: source-dir.tar.gz

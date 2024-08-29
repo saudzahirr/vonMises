@@ -42,3 +42,27 @@ jobs:
         ruff version
         ruff format --check .
         ruff check --output-format=github .
+
+    - name: Archive VM Environment
+      run: |
+        tar -czf vm-env.tar.gz $CONDA_PREFIX
+      continue-on-error: true
+      if: always()
+      # Store VM environment as an artifact
+      - name: Upload VM Environment
+        uses: actions/upload-artifact@v3
+        with:
+          name: vm-environment
+          path: vm-env.tar.gz
+
+    - name: Archive Source Directory
+      run: |
+        tar -czf source-dir.tar.gz .
+      continue-on-error: true
+      if: always()
+      # Store Source Directory as an artifact
+      - name: Upload Source Directory
+        uses: actions/upload-artifact@v3
+        with:
+          name: source-directory
+          path: source-dir.tar.gz
