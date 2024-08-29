@@ -20,12 +20,7 @@ from pathlib import Path
 
 
 def get_python_exe():
-    for path in sys.path:
-        python_exe_path = os.path.join(path, "python.exe")
-        if os.path.isfile(python_exe_path):
-            return path
-
-    raise Exception("Python executable not found")
+    return sys.executable
 
 
 sys_version = f"{sys.version_info.major}{sys.version_info.minor}"
@@ -39,7 +34,7 @@ if sys.platform == "win32":
         "vonmises",
         "lib",
         "bin",
-        f"libvonmises.dll",
+        "libvonmises.dll",
     )
     os.add_dll_directory(str(shared_file_path))
 elif sys.platform == "linux":
@@ -47,9 +42,9 @@ elif sys.platform == "linux":
     # eigen_lib = ctypes.CDLL(str(shared_file_path))
     shared_file_path = Path(
         site.getsitepackages()[0],
-        "src",
+        "vonmises",
         "lib",
-        f"vonMises.cpython-{sys_version}-x86_64-linux-gnu.so",
+        "libvonmises.so",
     )
 
 vonmises_lib = ctypes.CDLL(str(shared_file_path), ctypes.RTLD_GLOBAL)

@@ -7,5 +7,8 @@ if sys.platform == "win32":
     cmake_args.append("MinGW Makefiles")
 
 setup(
-    cmake_args=cmake_args
+    package_data={
+        "vonmises": ["lib/*.so"],
+    },
+    cmake_args=cmake_args,
 )
