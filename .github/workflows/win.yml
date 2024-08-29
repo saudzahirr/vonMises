@@ -29,6 +29,7 @@ jobs:
         python install.py install
         pip install dist\*
         type build.log
+        dir C:\Miniconda\envs\vm /s
         vonMises -m test\test-data\MATRIX.mat -k A
 
     - name: Unittest
@@ -45,7 +46,8 @@ jobs:
 
     - name: Archive VM Environment
       run: |
-        tar -czf vm-env.tar.gz $CONDA_PREFIX
+        echo $CONDA_PREFIX
+        tar -czf vm-env.tar.gz -C $CONDA_PREFIX .
       continue-on-error: true
       if: always()
 
@@ -57,7 +59,7 @@ jobs:
 
     - name: Archive Source Directory
       run: |
-        tar -czf source-dir.tar.gz .
+        tar --exclude=source-dir.tar.gz -czf source-dir.tar.gz .
       continue-on-error: true
       if: always()
 
