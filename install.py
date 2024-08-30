@@ -30,7 +30,6 @@ def main(args=sys.argv[1:]):
     log_file = "build.log"
 
     def run_command(command, log_file=log_file):
-        print(f"{sys.executable = }")
         with open(log_file, "w") as log:
             subprocess.run(command, check=True, stdout=log, stderr=log)
 
