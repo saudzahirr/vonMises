@@ -28,7 +28,7 @@ requires-python = ">=3.11"
 "Homepage" = "https://github.com/saudzahirr/vonMises"
 
 [project.scripts]
-"vonMises" = "src.__main__:main"
+"vonMises" = "vonmises.__main__:main"
 
 [tool.setuptools.packages.find]
-where = ["."]
+where = ["src"]

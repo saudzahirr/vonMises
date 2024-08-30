@@ -13,15 +13,7 @@ License for more details.
 """
 
 import ctypes
-import sys
-from pathlib import Path
-
-if sys.platform == "win32":
-    shared_file_path = Path(sys.prefix, "lib", "libeigen.dll")
-    eigen_lib = ctypes.CDLL(str(shared_file_path), winmode=0)
-elif sys.platform == "linux":
-    shared_file_path = Path(sys.prefix, "lib", "libeigen.so")
-    eigen_lib = ctypes.CDLL(str(shared_file_path))
+from vonmises.lib import vonmises_lib
 
 
 class EigenValueProblem:
@@ -61,7 +53,7 @@ class EigenValueProblem:
 
 
 def eigen(A):
-    return EigenValueProblem(eigen_lib).solve(A)
+    return EigenValueProblem(vonmises_lib).solve(A)
 
 
 def eigenvalues(A):
