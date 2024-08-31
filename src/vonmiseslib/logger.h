@@ -21,10 +21,10 @@
     #include <ctime>
 #endif
 
-#define DEBUG(msg, ...) fmt::print(__TIME__ ": DEBUG : " msg "\n", ##__VA_ARGS__)
-#define INFO(msg, ...) fmt::print(__TIME__ ": INFO : " msg "\n", ##__VA_ARGS__)
-#define WARNING(msg, ...) fmt::print(__TIME__ ": WARNING : " msg "\n", ##__VA_ARGS__)
-#define ERROR(msg, ...) fmt::print(__TIME__ ": ERROR : " msg "\n", ##__VA_ARGS__)
+#define DEBUG_OUT(msg, ...) fmt::print(__TIME__ ": DEBUG : " msg "\n", ##__VA_ARGS__)
+#define INFO_OUT(msg, ...) fmt::print(__TIME__ ": INFO : " msg "\n", ##__VA_ARGS__)
+#define WARNING_OUT(msg, ...) fmt::print(__TIME__ ": WARNING : " msg "\n", ##__VA_ARGS__)
+#define ERROR_OUT(msg, ...) fmt::print(__TIME__ ": ERROR : " msg "\n", ##__VA_ARGS__)
 
 using namespace std;
 

@@ -18,8 +18,8 @@
 
 VectorXd vonMisesIterationMethod(const MatrixXd& A) {
 
-    INFO("Starting Von Mises Method ...");
-    INFO("Initializing random vector for Von Mises iteration ...");
+    INFO_OUT("Starting Von Mises Method ...");
+    INFO_OUT("Initializing random vector for Von Mises iteration ...");
 
     int n = A.rows();
     VectorXd x = VectorXd::Zero(n);
@@ -49,7 +49,7 @@ VectorXd vonMisesIterationMethod(const MatrixXd& A) {
 
         double epsilon = (x - u).norm();
         if (epsilon == 0 || epsilon < TOLERANCE) {
-            DEBUG("Dominant Eigenvector converged at {} iterations.", a);
+            DEBUG_OUT("Dominant Eigenvector converged at {} iterations.", a);
 
             return x;
         }

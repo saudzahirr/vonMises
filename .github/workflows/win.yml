@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - master
+      - Fix-build
       - Fix-ci/cd-pipeline
   pull_request:
     branches:
       - master
-      - Fix-ci/cd-pipeline
 
 jobs:
   build:

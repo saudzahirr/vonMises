@@ -17,11 +17,11 @@
 
 
 double rayleighQuotient(const MatrixXd& A, const VectorXd& x) {
-    INFO("Calculating eigenvalue using Rayleigh Quotient ...");
+    INFO_OUT("Calculating eigenvalue using Rayleigh Quotient ...");
 
     double k = (A * x).dot(x) / x.dot(x);
 
-    DEBUG("Eigenvalue: {}", k);
+    DEBUG_OUT("Eigenvalue: {}", k);
 
     return k;
 }

@@ -2,13 +2,13 @@ name: Linux Build and Test
 
 on:
   push:
-    branches: 
+    branches:
       - master
+      - Fix-build
       - Fix-ci/cd-pipeline
   pull_request:
-    branches: 
+    branches:
       - master
-      - Fix-ci/cd-pipeline
 
 jobs:
   build:

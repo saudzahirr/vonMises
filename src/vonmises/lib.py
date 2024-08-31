@@ -13,6 +13,7 @@ License for more details.
 """
 
 import ctypes
+import os
 import sys
 from pathlib import Path
 
@@ -24,6 +25,7 @@ if sys.platform == "win32":
         "bin",
         "libvonmises.dll",
     )
+    os.add_dll_directory(str(shared_file_path))
     vonmises_lib = ctypes.CDLL(str(shared_file_path), winmode=0)
 elif sys.platform == "linux":
     shared_file_path = Path(sys.prefix, "lib", "libvonmises.so")
