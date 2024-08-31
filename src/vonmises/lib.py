@@ -18,7 +18,6 @@ import sys
 from pathlib import Path
 
 
-sys_version = f"{sys.version_info.major}{sys.version_info.minor}"
 if sys.platform == "win32":
     shared_file_path = Path(
         sys.prefix,
