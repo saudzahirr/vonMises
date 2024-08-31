@@ -36,10 +36,12 @@ def main(args=sys.argv[1:]):
     if args.mode == "wheel":
         print("Starting wheel build")
         run_command(build_cmd)
+        print("Wheel build completed")
 
     elif args.mode == "install":
         print("Starting install")
         run_command(install_cmd)
+        print("Finished installation")
 
     elif args.mode == "develop":
         print("Starting development build")
