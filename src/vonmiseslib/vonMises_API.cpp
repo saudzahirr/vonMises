@@ -21,21 +21,21 @@
  */
 
 void solveEigenValueProblem(double** A, size_t size, double* eigenvalues, double** eigenvectors) {
-    INFO("----------------------------------------------");
-    INFO("CMake Version   :: {}", CMake_VERSION);
-    INFO("GCC Version     :: {}", gcc_VERSION);
-    INFO("OMP max threads :: {}", omp_get_max_threads());
-    INFO("----------------------------------------------");
+    INFO_OUT("----------------------------------------------");
+    INFO_OUT("CMake Version   :: {}", CMake_VERSION);
+    INFO_OUT("GCC Version     :: {}", gcc_VERSION);
+    INFO_OUT("OMP max threads :: {}", omp_get_max_threads());
+    INFO_OUT("----------------------------------------------");
 
     MatrixXd _A =  convertToEigenMatrix(A, size);
     // Power Iteration with Deflation
     for (size_t a = 0; a < size; a++) {
         double start_time = clocktime();
         VectorXd x = vonMisesIterationMethod(_A);
-        DEBUG("Execution time for Von Mises Method: {} seconds", deltaTime(start_time));
+        DEBUG_OUT("Execution time for Von Mises Method: {} seconds", deltaTime(start_time));
         start_time = clocktime();
         double c = rayleighQuotient(_A, x);
-        DEBUG("Execution time for Rayleigh Quotient Method: {} seconds", deltaTime(start_time));
+        DEBUG_OUT("Execution time for Rayleigh Quotient Method: {} seconds", deltaTime(start_time));
         // Store the computed eigenvalue
         eigenvalues[a] = c;
 
