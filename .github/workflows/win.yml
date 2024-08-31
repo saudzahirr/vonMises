@@ -6,6 +6,7 @@ on:
       - master
       - Fix-build
       - Fix-ci/cd-pipeline
+      - Fix-unittest
   pull_request:
     branches:
       - master
@@ -32,7 +33,7 @@ jobs:
     - name: Unittest
       run: |
         conda activate vm
-        pytest -s test\unit-test
+        pytest -s . > test.log 2>&1
 
     - name: Code Lint
       run: |
@@ -49,5 +50,4 @@ jobs:
         path: |
           build.log
           vonMises.log
-          test\unit-test.log
-          test\*.log
+          test.log

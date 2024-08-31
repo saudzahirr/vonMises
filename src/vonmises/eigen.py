@@ -13,6 +13,7 @@ License for more details.
 """
 
 import ctypes
+import numpy as np
 from vonmises.lib import vonmises_lib
 
 
@@ -32,24 +33,21 @@ class EigenValueProblem:
 
         size = len(A)
 
-        # Allocate and flatten the matrix
         A_ptr = (ctypes.POINTER(ctypes.c_double) * size)()
         for i, row in enumerate(A):
             A_ptr[i] = (ctypes.c_double * len(row))(*row)
 
-        # Allocate memory for eigenvalues and eigenvectors
         eigenvalues = (ctypes.c_double * size)()
         eigenvectors = (ctypes.POINTER(ctypes.c_double) * size)()
         for i in range(size):
             eigenvectors[i] = (ctypes.c_double * size)()
 
-        # Call the C++ function
         solveEigenValueProblem(A_ptr, size, eigenvalues, eigenvectors)
 
         eigenvalues = list(eigenvalues)
         eigenvectors = [list(eigenvectors[i][0:size]) for i in range(size)]
 
-        return eigenvalues, eigenvectors
+        return np.array(eigenvalues), np.array(eigenvectors).T
 
 
 def eigen(A):

@@ -21,7 +21,7 @@
  */
 
 void solveEigenValueProblem(double** A, size_t size, double* eigenvalues, double** eigenvectors) {
-    INFO_OUT("----------------------------------------------");
+    INFO_OUT("\n----------------------------------------------");
     INFO_OUT("CMake Version   :: {}", CMake_VERSION);
     INFO_OUT("GCC Version     :: {}", gcc_VERSION);
     INFO_OUT("OMP max threads :: {}", omp_get_max_threads());
