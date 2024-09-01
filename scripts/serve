@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+cd ../docs
+source $(conda info --base)/etc/profile.d/conda.sh
+conda activate vm
+mkdocs serve &
+sleep 4
+open http://127.0.0.1:8000/vonMises/
