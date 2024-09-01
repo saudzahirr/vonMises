@@ -52,11 +52,3 @@ A = A - \lambda \cdot (x \cdot x^T)
 \]
 
 This ensures that subsequent iterations of the algorithm find the next largest eigenvalue of the matrix.
-
-## Example
-
-Given a matrix \( A \), the vonMises algorithm computes its eigenvalues and eigenvectors as follows:
-
-1. Power Iteration is applied to find the largest eigenvalue \( \lambda_1 \) and its corresponding eigenvector \( x_1 \).
-2. The matrix is deflated: \( A = A - \lambda_1 \cdot (x_1 \cdot x_1^T) \).
-3. The process is repeated for the remaining matrix to compute the next largest eigenvalue and eigenvector.
