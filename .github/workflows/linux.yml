@@ -89,3 +89,73 @@ jobs:
         name: test-logs
         path: |
           test.log
+
+  release:
+    runs-on: ubuntu-latest
+    needs: unittest
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Create Environment
+      run: |
+        conda env create -f environment.yml
+
+    - name: Build Distribution
+      run: |
+        source $(conda info --base)/etc/profile.d/conda.sh
+        conda activate vm
+        python install.py wheel
+
+    - name: Check Wheel with Twine
+      run: |
+        source $(conda info --base)/etc/profile.d/conda.sh
+        conda activate vm
+        pip install --quiet --upgrade twine
+        twine check dist/* > wheel-check.log 2>&1
+
+    - name: Upload Package to PyPI
+      run: |
+        source $(conda info --base)/etc/profile.d/conda.sh
+        conda activate vm
+        pip install --quiet --upgrade twine
+        echo "${{ secrets.vonMisesTOKEN }}" | twine upload dist/* --username __token__ --password-stdin
+
+    - name: Archive Release Logs
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: release-logs
+        path: |
+          wheel-check.log
+          release.log
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: release
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Create Environment
+      run: |
+        conda env create -f environment.yml
+
+    - name: Run Deployment Script
+      run: |
+        chmod +x scripts/deploy
+        ./scripts/deploy
+
+    - name: Archive Deployment Logs
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: deployment-logs
+        path: |
+          mkdocs.log

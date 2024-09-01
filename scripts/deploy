@@ -7,6 +7,5 @@ conda activate vm
 mkdocs build
 sleep 4
 mkdocs gh-deploy --clean
-git clean -xfd
 sleep 4
 open https://saudzahirr.github.io/vonMises/
