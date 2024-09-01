@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+cd ../docs
+source $(conda info --base)/etc/profile.d/conda.sh
+conda activate vm
+mkdocs build
+sleep 4
+mkdocs gh-deploy --clean
+git clean -xfd
+sleep 4
+open https://saudzahirr.github.io/vonMises/

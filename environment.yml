@@ -17,3 +17,6 @@ dependencies:
   - ruff
   - pytest
   - tqdm
+  - pip
+  - pip:
+    - mkdocs-material
