@@ -298,6 +298,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -368,6 +377,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -417,11 +435,11 @@ R(x) = \frac{x^T A x}{x^T x}
 <p>This method refines the computed eigenvalue after performing the Power Iteration.</p>
 <h2 id="complete-algorithm">Complete Algorithm<a class="headerlink" href="#complete-algorithm" title="Permanent link">&para;</a></h2>
 <p>The vonMises algorithm combines Power Iteration with Rayleigh Quotient and deflation:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">vonMises</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">:</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">:</span>
-<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">power_iteration</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="w">        </span><span class="n">λ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rayleigh_quotient</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
-<span class="w">        </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">λ</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="err">@</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">T</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="n">Algorithm</span> <span class="n">vonMises</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">power_iteration</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+        <span class="n">λ</span> <span class="o">=</span> <span class="n">rayleigh_quotient</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">A</span> <span class="o">-</span> <span class="n">λ</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">@</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </code></pre></div>
 
 <p>The algorithm repeats until all eigenvalues and eigenvectors are computed.</p>
@@ -436,6 +454,13 @@ A = A - \lambda \cdot (x \cdot x^T)
 </script>
 </div>
 <p>This ensures that subsequent iterations of the algorithm find the next largest eigenvalue of the matrix.</p>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<p>Given a matrix <span class="arithmatex"><span class="MathJax_Preview"> A </span><script type="math/tex"> A </script></span>, the vonMises algorithm computes its eigenvalues and eigenvectors as follows:</p>
+<ol>
+<li>Power Iteration is applied to find the largest eigenvalue <span class="arithmatex"><span class="MathJax_Preview"> \lambda_1 </span><script type="math/tex"> \lambda_1 </script></span> and its corresponding eigenvector <span class="arithmatex"><span class="MathJax_Preview"> x_1 </span><script type="math/tex"> x_1 </script></span>.</li>
+<li>The matrix is deflated: <span class="arithmatex"><span class="MathJax_Preview"> A = A - \lambda_1 \cdot (x_1 \cdot x_1^T) </span><script type="math/tex"> A = A - \lambda_1 \cdot (x_1 \cdot x_1^T) </script></span>.</li>
+<li>The process is repeated for the remaining matrix to compute the next largest eigenvalue and eigenvector.</li>
+</ol>
 
 
 
