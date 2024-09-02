@@ -80,6 +80,7 @@ jobs:
       run: |
         source $(conda info --base)/etc/profile.d/conda.sh
         conda activate vm
+        python install.py install
         pytest -s . > test.log 2>&1
 
     - name: Archive Test Logs

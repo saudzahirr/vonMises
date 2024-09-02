@@ -82,6 +82,7 @@ jobs:
     - name: Unittest
       run: |
         conda activate vm
+        python install.py install
         pytest -s . > test.log 2>&1
 
     - name: Archive Test Logs
