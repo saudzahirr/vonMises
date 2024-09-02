@@ -12,23 +12,32 @@ requires = [
 [project]
 name = "vonMises"
 version = "1.0.0"
-authors = [{name = "Saud Zahir", email = "m.saud.zahir@gmail.com"}]
+description = "Numerical Algorithm for Eigenvalue Problems using Rayleigh Quotient and von Mises Iteration with Deflation."
+requires-python = ">=3.11"
+license = {text = "MIT"}
+
+authors = [
+  {name = "Saud Zahir", email = "m.saud.zahir@gmail.com"}
+]
+
 classifiers = [
   "Programming Language :: Python :: 3",
   "Programming Language :: C++ :: 11",
-  "License :: MIT",
-  "Operating System :: Linux",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: POSIX :: Linux"
 ]
-description = "Numerical Algorithm for Eigenvalue Problems using Rayleigh Quotient and von Mises Iteration with Deflation."
-keywords = ["numerical", "eigenvalues", "rayleigh", "von_mises"]
-license = {file = "LICENSE"}
-requires-python = ">=3.11"
+
+keywords = [
+  "numerical", "eigenvalues", "rayleigh", "von_mises"
+]
+
+readme = {file = "README.md", content-type = "text/markdown"}
 
 [project.urls]
-"Homepage" = "https://github.com/saudzahirr/vonMises"
+Homepage = "https://saudzahirr.github.io/vonMises/"
 
 [project.scripts]
-"vonMises" = "vonmises.__main__:main"
+vonMises = "vonmises.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
