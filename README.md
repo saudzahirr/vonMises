@@ -24,7 +24,7 @@ Make sure you have the required dependencies in your environment, especially **E
 To build vonMises from source, ensure you have **CMake**, **Eigen3**, and **fmt** installed. The project uses **scikit-build** to handle the Python build and installation process. You can clone the repository and build the project as follows:
 
 ```bash
-git clone https://github.com/your-username/vonMises.git
+git clone https://github.com/saudzahirr/vonMises.git
 cd vonMises
 pip install .
 ```
