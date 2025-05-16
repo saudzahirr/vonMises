@@ -5,10 +5,10 @@ import sys
 from argparse import ArgumentParser
 from pathlib import Path
 
-wheel_cmd = shlex.split("python -m build -n -x --wheel")
-build_cmd = shlex.split("pip wheel . -v -w dist ")
-install_cmd = shlex.split("pip install . -v")
-develop_cmd = shlex.split("pip install -e . -v")
+wheel_cmd = shlex.split("python -m build -n -x --wheel --log build.log")
+build_cmd = shlex.split("pip wheel . -v -w dist --log build.log")
+install_cmd = shlex.split("pip install . -v --log build.log")
+develop_cmd = shlex.split("pip install -e . -v --log build.log")
 
 
 def main(args=sys.argv[1:]):
@@ -29,23 +29,22 @@ def main(args=sys.argv[1:]):
     # Log to a file
     log_file = "build.log"
 
-    def run_command(command, log_file=log_file):
-        with open(log_file, "w") as log:
-            subprocess.run(command, check=True, stdout=log, stderr=log)
+    def execute(command, log_file=log_file):
+        subprocess.run(command, check=True)
 
     if args.mode == "wheel":
         print("Starting wheel build")
-        run_command(build_cmd)
+        execute(build_cmd)
         print("Wheel build completed")
 
     elif args.mode == "install":
         print("Starting install")
-        run_command(install_cmd)
+        execute(install_cmd)
         print("Finished installation")
 
     elif args.mode == "develop":
         print("Starting development build")
-        run_command(develop_cmd)
+        execute(develop_cmd)
         print("Finished development build")
 
     elif args.mode == "clean":
